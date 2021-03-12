@@ -21,4 +21,8 @@ export class VolunteerService {
     return this.volunteerModel.create(itemInput);
   }
 
+  deleteVolunteer(_id: string) {
+    return this.volunteerModel.deleteOne({_id});
+  }
+
 }

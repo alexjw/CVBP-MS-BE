@@ -13,6 +13,11 @@ export class VolunteerResolver {
     return this.volunteerService.createVolunteer(createVolunteerInput);
   }
 
+  @Mutation(returns => Boolean)
+  deleteVolunteer(@Args('_id') _id: string) {
+    return this.volunteerService.deleteVolunteer(_id).then(result => Boolean(result.deletedCount));
+  }
+
   @Mutation(returns => VolunteerType)
   editVolunteer(@Args('_id') _id: string, @Args({name: 'name', nullable: true}) name: string) {
     return this.volunteerService.getVolunteer(_id).then(volunteer => {
