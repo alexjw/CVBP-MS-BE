@@ -13,6 +13,14 @@ export class VolunteerResolver {
     return this.volunteerService.createVolunteer(createVolunteerInput);
   }
 
+  @Mutation(returns => VolunteerType)
+  editVolunteer(@Args('_id') _id: string, @Args({name: 'name', nullable: true}) name: string) {
+    return this.volunteerService.getVolunteer(_id).then(volunteer => {
+      volunteer.name = name || volunteer.name;
+      return volunteer.save();
+    })
+  }
+
   @Query(returns => VolunteerType)
   volunteer(@Args('_id') _id: string): Promise<Volunteer> {
     return this.volunteerService.getVolunteer(_id);
